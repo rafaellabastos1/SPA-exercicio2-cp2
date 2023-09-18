@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {useState} from 'react';
 
-function MeuComponente() {
-  const [itens, setItens] = useState([]); // Inicializa uma lista vazia
-  const [novoItem, setNovoItem] = useState(''); // Inicializa o valor do input vazio
+function AdicionarProdutos() {
 
-  // Função para lidar com a adição de um novo item à lista
+  //Inicializando a lista e o valor do input vazios
+  const [itens, setItens] = useState([])
+  const [novoItem, setNovoItem] = useState('') 
+
+  //Adicionando itens à lista
   const adicionarItem = () => {
-    if (novoItem.trim() !== '') { // Verifica se o valor não está em branco
-      setItens([...itens, novoItem]); // Adiciona o novo item à lista
-      setNovoItem(''); // Limpa o valor do input
+    if (novoItem.trim() !== '') {
+      setItens([...itens, novoItem])
+      setNovoItem('')
     }
-  };
+  }
 
   return (
     <div>
-      <h1>Minha Lista de Produtos</h1>
+      <h1>Lista de Produtos</h1>
       <ul>
         {produtos.map((produto) => (
           <li key={produto.id}>
@@ -26,6 +29,7 @@ function MeuComponente() {
           </li>
         ))}
       </ul>
+      
       <input
         type="text"
         value={novoItem}
@@ -36,4 +40,4 @@ function MeuComponente() {
   );
 }
 
-export default MeuComponente;
+export default AdicionarProdutos;

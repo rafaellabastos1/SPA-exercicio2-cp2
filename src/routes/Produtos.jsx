@@ -3,7 +3,7 @@ import { ListaProdutos } from "../components/ListaProdutos";
 import classes from "./Produtos.module.css";
 import {AiFillEdit as Editar} from "react-icons/ai";
 import {RiDeleteBin2Fill as Excluir} from "react-icons/ri";
-
+ 
 export default function Produtos() {
   return (
     <div>
