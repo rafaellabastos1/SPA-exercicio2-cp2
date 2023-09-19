@@ -1,43 +1,67 @@
-import React from 'react';
-import {useState} from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-function AdicionarProdutos() {
+function AdicionarProduto({ onAdicionarProduto }) {
+  const { id } = useParams();
+  const [nome, setNome] = useState('');
+  const [preco, setPreco] = useState('');
+  const [descricao, setDescricao] = useState('');
 
-  //Inicializando a lista e o valor do input vazios
-  const [itens, setItens] = useState([])
-  const [novoItem, setNovoItem] = useState('') 
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  //Adicionando itens à lista
-  const adicionarItem = () => {
-    if (novoItem.trim() !== '') {
-      setItens([...itens, novoItem])
-      setNovoItem('')
+    if (nome.trim() !== '' && preco.trim() !== '' && descricao.trim() !== '') {
+      const novoProduto = {
+        id,
+        nome,
+        desc: descricao,
+        preco: parseFloat(preco),
+        img: 'https://picsum.photos/100/100',
+      };
+
+      onAdicionarProduto(novoProduto);
+
+      setNome('');
+      setPreco('');
+      setDescricao('');
     }
-  }
+  };
 
   return (
     <div>
-      <h1>Lista de Produtos</h1>
-      <ul>
-        {produtos.map((produto) => (
-          <li key={produto.id}>
-            <div>
-              <strong>{produto.nome}</strong>
-            </div>
-            <div>Preço: R$ {produto.preco.toFixed(2)}</div>
-            <div>Descrição: {produto.descricao}</div>
-          </li>
-        ))}
-      </ul>
-      
-      <input
-        type="text"
-        value={novoItem}
-        onChange={(e) => setNovoItem(e.target.value)}
-      />
-      <button onClick={adicionarItem}>Adicionar</button>
+      <h2>Adicionar Produto</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="nome">Nome do Produto:</label>
+          <input
+            type="text"
+            id="nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="descricao">Descrição do Produto:</label>
+          <input
+            type="text"
+            id="descricao"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="preco">Preço do Produto:</label>
+          <input
+            type="number"
+            id="preco"
+            value={preco}
+            onChange={(e) => setPreco(e.target.value)}
+          />
+        </div>
+        <button type="submit">Adicionar</button>
+      </form>
     </div>
   );
 }
 
-export default AdicionarProdutos;
+export default AdicionarProduto;
