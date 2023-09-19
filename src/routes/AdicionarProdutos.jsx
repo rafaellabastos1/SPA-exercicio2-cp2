@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function AdicionarProduto({ onAdicionarProduto }) {
-  const { id } = useParams();
+function AdicionarProduto({ onAdicionarProduto, produtos }) {
   const [nome, setNome] = useState('');
   const [preco, setPreco] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [novoProdutoId, setNovoProdutoId] = useState(produtos.length + 1);
+
+  // const proximoId = produtos.length > 0 ? Math.max(...produtos.map((produto) => produto.id)) + 1 : 1;
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (nome.trim() !== '' && preco.trim() !== '' && descricao.trim() !== '') {
       const novoProduto = {
-        id,
+        id: novoProdutoId,
         nome,
         desc: descricao,
         preco: parseFloat(preco),
@@ -21,6 +23,7 @@ function AdicionarProduto({ onAdicionarProduto }) {
 
       onAdicionarProduto(novoProduto);
 
+      setNovoProdutoId(novoProdutoId + 1);
       setNome('');
       setPreco('');
       setDescricao('');

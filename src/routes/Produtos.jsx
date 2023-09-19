@@ -11,7 +11,6 @@ export default function Produtos() {
 
   const adicionarProduto = (novoProduto) => {
     setProdutos([...produtos, novoProduto]);
-    console.log(produtos);
   };
 
   return (
@@ -19,7 +18,7 @@ export default function Produtos() {
       <h1>Produtos de INFORMÁTICA - FIPAPI</h1>
       <p>Os Melhores Produtos do Mercado</p>
 
-      <AdicionarProduto onAdicionarProduto={adicionarProduto}/>
+      <AdicionarProduto onAdicionarProduto={adicionarProduto} produtos={produtos}/>
 
       <table className={classes.estilo}>
         <thead className={classes.tableHeaders}>
