@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+
 
 function AdicionarProduto({ onAdicionarProduto, produtos }) {
   const [nome, setNome] = useState('');
   const [preco, setPreco] = useState('');
   const [descricao, setDescricao] = useState('');
   const [novoProdutoId, setNovoProdutoId] = useState(produtos.length + 1);
-
-  // const proximoId = produtos.length > 0 ? Math.max(...produtos.map((produto) => produto.id)) + 1 : 1;
 
   const handleSubmit = (event) => {
     event.preventDefault();
