@@ -16,7 +16,7 @@ export default function ModalExcluir(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response); // Verifique a resposta do servidor (pode ser uma mensagem de sucesso).
+        console.log(response); // Avalie a resposta do servidor (pode ser uma mensagem de confirmação de sucesso).
         props.setOpen(false);
         navigation("/produtos");
       })
