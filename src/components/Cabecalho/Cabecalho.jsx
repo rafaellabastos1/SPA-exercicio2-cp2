@@ -4,7 +4,6 @@ import "./Cabecalho.scss";
 export default function Cabecalho(props) {
 
       const navigation = useNavigate();
-
       console.log(useNavigate().prototype);
 
   return (
