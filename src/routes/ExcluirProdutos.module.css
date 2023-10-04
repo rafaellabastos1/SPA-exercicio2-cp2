@@ -1,3 +1,5 @@
+
+
 .card{
     display: flex;
     flex-direction: column;
@@ -26,7 +28,9 @@
             margin: 20px 0;
             font-weight: bold;
          }
+
     }
+
 }
 
 .btn{
@@ -57,4 +61,5 @@
             background-color: #0b3d0b
         }
     }
+
 }

@@ -1,24 +1,39 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ListaProdutos } from "../components/ListaProdutos";
 import classes from "./Produtos.module.css";
 import { AiFillEdit as Editar } from "react-icons/ai";
 import { RiDeleteBin2Fill as Excluir } from "react-icons/ri";
-import AdicionarProduto from "./AdicionarProdutos";
+import { useEffect, useState } from "react";
+import ModalInserir from "../components/ModalInserir/ModalInserir";
 
 export default function Produtos() {
-  const [produtos, setProdutos] = useState(ListaProdutos);
+  document.title = "Lista de Produtos: ";
 
-  const adicionarProduto = (novoProduto) => {
-    setProdutos([...produtos, novoProduto]);
-  };
+  const [listaProdutoExterno, setListaProdutoExterno] = useState([{}]);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if(!open) {
+    fetch("http://localhost:5000/produtos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setListaProdutoExterno(data))
+      .catch((error) => console.log(error));
+    }
+  }, [open]);
+
 
   return (
     <div>
       <h1>Produtos de INFORMÁTICA - FIPAPI</h1>
       <p>Os Melhores Produtos do Mercado</p>
 
-      <AdicionarProduto onAdicionarProduto={adicionarProduto} produtos={produtos}/>
+      {open ? <ModalInserir open={open} setOpen={setOpen}/> : ""}
+
+      <Link onClick={()=> setOpen(true)}>Cadastro de Produtos</Link>
 
       <table className={classes.estilo}>
         <thead className={classes.tableHeaders}>
@@ -33,8 +48,8 @@ export default function Produtos() {
         </thead>
 
         <tbody>
-          {produtos.map((produto) => (
-            <tr key={produto.id} className={classes.tableLine}>
+          {listaProdutoExterno.map((produto, indice) => (
+            <tr key={indice} className={classes.tableLine}>
               <td>{produto.id}</td>
               <td>{produto.nome}</td>
               <td>{produto.desc}</td>
@@ -44,11 +59,13 @@ export default function Produtos() {
               </td>
               <td>
                 <Link to={`/editar/produtos/${produto.id}`}>
+                  {" "}
                   <Editar />
                 </Link>{" "}
                 |{" "}
                 <Link to={`/excluir/produtos/${produto.id}`}>
-                  <Excluir />
+                  {" "}
+                  <Excluir />{" "}
                 </Link>
               </td>
             </tr>
@@ -65,3 +82,31 @@ export default function Produtos() {
   );
 }
 
+//Exemplo de useEffect 3x.
+// useEffect(()=>{
+//   console.log("Este useEffect renderiza sempre que ocorre alguma atualização no componente!");
+// });
+
+// const [listaProdutosLocal, setListaProdutosLocal] = useState([{}]);
+
+// useEffect(()=>{
+//   console.log("Este useEffect renderiza apenas uma vez no carregamento do componente!");
+// },[]);
+
+// const [counter2, setCounter2] = useState(0);
+
+// useEffect(()=>{
+//   console.log("Este useEffect renderiza apenas se o objeto/elemento/componente e ou variável sofrer uma atualização. Devemos colocar o item a ser monitorado no array de dependências: [ ]");
+// },[counter2]);
+
+// return (
+//   <div>
+//     <h1>Produtos de INFORMÁTICA - FIPAPI</h1>
+//     <p>Os Melhores Produtos do Mercado</p>
+
+//     <div>
+//       <button onClick={()=> setCounter(counter + 1)}>COUNTER - {counter}</button>
+//     </div>
+//     <div>
+//       <button onClick={()=> setCounter2(counter2 + 1)}>COUNTER2 - {counter2}</button>
+//     </div>
