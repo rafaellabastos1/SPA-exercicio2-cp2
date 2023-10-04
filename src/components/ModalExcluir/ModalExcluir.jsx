@@ -39,7 +39,7 @@ export default function ModalExcluir(props) {
                 name="idToDelete"
                 value={idToDelete}
                 onChange={(e) => setIdToDelete(e.target.value)}
-                className="input-field"
+                className="input-fieldExcluir"
               />
               <button onClick={handleDelete} className="delete-button">
                 EXCLUIR
