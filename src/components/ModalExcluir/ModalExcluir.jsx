@@ -7,7 +7,7 @@ export default function ModalExcluir(props) {
   const [idToDelete, setIdToDelete] = useState(""); // Variável para rastrear o ID do produto que será removido.
 
   const handleDelete = () => {
-    // Faça uma solicitação DELETE para o servidor com o ID a ser excluído.
+    // Envie uma solicitação DELETE para o servidor usando o ID que deve ser removido.
     fetch(`http://localhost:5000/produtos/${idToDelete}`, {
       method: "DELETE",
       headers: {
