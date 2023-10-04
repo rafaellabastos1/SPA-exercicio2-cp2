@@ -4,7 +4,7 @@ import "./ModalExcluir.scss";
 
 export default function ModalExcluir(props) {
   const navigation = useNavigate();
-  const [idToDelete, setIdToDelete] = useState(""); // Estado para acompanhar o ID do produto a ser excluído.
+  const [idToDelete, setIdToDelete] = useState(""); // Variável para rastrear o ID do produto que será removido.
 
   const handleDelete = () => {
     // Faça uma solicitação DELETE para o servidor com o ID a ser excluído.
