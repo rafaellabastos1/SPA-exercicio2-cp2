@@ -23,22 +23,29 @@ export default function ModalExcluir(props) {
       .catch((error) => console.error(error));
   };
 
-
   if (props.open) {
     return (
-      <div className={styles.container}>
-        <h1>EXCLUSÂO DE PRODUTOS</h1>
-
+       <div> 
         <div>
-          <form className="formGroup" onSubmit={handleSubmit}>
+          <form>
             <fieldset>
-        <span  className="btnClose" onClick={()=> props.setOpen(false)}>X</span>
-             
-                <button>EXCLUIR</button>
+              <span>
+                X
+              </span>
+              <label htmlFor="idToDelete">ID do Produto a Excluir:</label>
+              <input
+                type="text"
+                id="idToDelete"
+                name="idToDelete"
+                value={idToDelete}
+                onChange={(e) => setIdToDelete(e.target.value)}
+              />
+              <button>
+                EXCLUIR
+              </button>
             </fieldset>
           </form>
         </div>
-
       </div>
     );
   }
