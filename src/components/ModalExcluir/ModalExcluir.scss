@@ -2,3 +2,19 @@
 $text-color: #fff;
 $bg-color: #000000;
 
+// Mixin para o botão de fechar
+@mixin closeButtonStyles {
+  background-color: $text-color;
+  color: #000000;
+  border-radius: 50%;
+  display: inline-block;
+  font-weight: bold;
+  transition: background-color 200ms;
+  float: right;
+  width: 3%;
+  text-align: center;
+  border: 2px solid #7c7979;
+  user-select: none;
+
+}
+
