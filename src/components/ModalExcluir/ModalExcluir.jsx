@@ -25,11 +25,11 @@ export default function ModalExcluir(props) {
 
   if (props.open) {
     return (
-       <div> 
+       <div className="modal-containerExcluir"> 
         <div>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form className="formGroupExcluir" onSubmit={(e) => e.preventDefault()}>
             <fieldset>
-              <span onClick={() => props.setOpen(false)}>
+              <span className="btnCloseExcluir" onClick={() => props.setOpen(false)}>
                 X
               </span>
               <label htmlFor="idToDelete">ID do Produto a Excluir:</label>
@@ -39,8 +39,9 @@ export default function ModalExcluir(props) {
                 name="idToDelete"
                 value={idToDelete}
                 onChange={(e) => setIdToDelete(e.target.value)}
+                className="input-field"
               />
-              <button onClick={handleDelete}>
+              <button onClick={handleDelete} className="delete-button">
                 EXCLUIR
               </button>
             </fieldset>
