@@ -1,8 +1,8 @@
-// Variáveis para os estilos
+//Variáveis para os estilos
 $text-color: #fff;
 $bg-color: #000000;
 
-// Mixin para o botão de fechar
+//Mixin para o botão de fechar
 @mixin closeButtonStyles {
   background-color: $text-color;
   color: $bg-color;
@@ -27,7 +27,7 @@ $bg-color: #000000;
   }
 }
 
-/* Estilo para o container do modal */
+//Estilo para o container do modal
 .modal-containerExcluir {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -41,7 +41,7 @@ $bg-color: #000000;
   z-index: 1000;
 }
 
-/* Estilo para o conteúdo do modal */
+//Estilo para o conteúdo do modal
 .formGroupExcluir {
   background-color: $text-color;
   padding: 20px;
@@ -85,7 +85,7 @@ $bg-color: #000000;
   }
 }
 
-/* Estilo para o botão de fechar */
+//Estilo para o botão de fechar
 .btnCloseExcluir {
   position: absolute;
   top: 10px;
@@ -96,8 +96,8 @@ $bg-color: #000000;
   border: none;
   color: $text-color;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-radius 0.2s ease-in-out;
-  border-radius: 50%; /* Adicione bordas arredondadas */
-  padding: 8px; /* Adicione algum espaço interno para torná-lo mais arredondado */
+  border-radius: 50%;
+  padding: 8px;
 
-  @include closeButtonStyles; /* Aplicar os estilos do mixin */
+  @include closeButtonStyles;
 }

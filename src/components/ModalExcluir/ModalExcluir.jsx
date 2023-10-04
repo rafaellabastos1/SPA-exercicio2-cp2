@@ -4,10 +4,10 @@ import "./ModalExcluir.scss";
 
 export default function ModalExcluir(props) {
   const navigation = useNavigate();
-  const [idToDelete, setIdToDelete] = useState(""); // Variável para rastrear o ID do produto que será removido.
+  const [idToDelete, setIdToDelete] = useState("");
 
   const handleDelete = () => {
-    // Envie uma solicitação DELETE para o servidor usando o ID que deve ser removido.
+    //ID que vai ser removido
     fetch(`http://localhost:5000/produtos/${idToDelete}`, {
       method: "DELETE",
       headers: {
@@ -16,7 +16,7 @@ export default function ModalExcluir(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response); // Avalie a resposta do servidor (pode ser uma mensagem de confirmação de sucesso).
+        console.log(response);
         props.setOpen(false);
         navigation("/produtos");
       })
@@ -29,9 +29,7 @@ export default function ModalExcluir(props) {
         <div>
           <form className="formGroupExcluir" onSubmit={(e) => e.preventDefault()}>
             <fieldset>
-              <span className="btnCloseExcluir" onClick={() => props.setOpen(false)}>
-                X
-              </span>
+              <span className="btnCloseExcluir" onClick={() => props.setOpen(false)}>X</span>
               <label htmlFor="idToDelete">ID do Produto a Excluir:</label>
               <input
                 type="text"
@@ -41,9 +39,7 @@ export default function ModalExcluir(props) {
                 onChange={(e) => setIdToDelete(e.target.value)}
                 className="input-fieldExcluir"
               />
-              <button onClick={handleDelete} className="delete-button">
-                EXCLUIR
-              </button>
+              <button onClick={handleDelete} className="delete-button">EXCLUIR</button>
             </fieldset>
           </form>
         </div>
