@@ -69,7 +69,7 @@ export default function Produtos() {
 
       {open ? <ModalInserir open={open} setOpen={setOpen}/> : ""}
 
-      <Link onClick={()=> setOpen(true)}>Cadastro de Produtos</Link>
+      <Link onClick={()=> setOpen(true)}>Cadastro de Produtos | </Link>
 
       {openExclui ? <ModalExcluir open={openExclui} setOpen={setOpenExclui}/> : ""}
 
