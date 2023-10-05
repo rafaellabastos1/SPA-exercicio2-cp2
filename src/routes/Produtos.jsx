@@ -5,14 +5,17 @@ import { AiFillEdit as Editar } from "react-icons/ai";
 import { RiDeleteBin2Fill as Excluir } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import ModalInserir from "../components/ModalInserir/ModalInserir";
+import ModalExcluir from "../components/ModalExcluir/ModalExcluir";
 
 export default function Produtos() {
   document.title = "Lista de Produtos: ";
 
   const [listaProdutoExterno, setListaProdutoExterno] = useState([{}]);
   const [open, setOpen] = useState(false);
+  const [openExclui, setOpenExclui] = useState(false);
 
-  useEffect(() => {
+ 
+   useEffect(() => {
     if(!open) {
     fetch("http://localhost:5000/produtos", {
       method: "GET",
@@ -25,6 +28,39 @@ export default function Produtos() {
       .catch((error) => console.log(error));
     }
   }, [open]);
+  
+  useEffect(() => {
+    if(!openExclui) {
+    fetch("http://localhost:5000/produtos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setListaProdutoExterno(data))
+      .catch((error) => console.log(error));
+    }
+  }, [openExclui]);
+
+  const handleDeleteItem = (id) => {
+    fetch(`http://localhost:5000/produtos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(() => {
+        // Atualize a lista de produtos após a exclusão
+        setListaProdutoExterno((prevLista) =>
+          prevLista.filter((produto) => produto.id !== id)
+        );
+      })
+      .catch((error) => console.log(error));
+  };
+
+  
 
   return (
     <div>
@@ -34,6 +70,11 @@ export default function Produtos() {
       {open ? <ModalInserir open={open} setOpen={setOpen}/> : ""}
 
       <Link onClick={()=> setOpen(true)}>Cadastro de Produtos</Link>
+
+      {openExclui ? <ModalExcluir open={openExclui} setOpen={setOpenExclui}/> : ""}
+
+      <Link onClick={()=> setOpenExclui(true)}>Excluir Produtos</Link>
+
 
       <table className={classes.estilo}>
         <thead className={classes.tableHeaders}>
@@ -63,10 +104,11 @@ export default function Produtos() {
                   <Editar />
                 </Link>{" "}
                 |{" "}
-                <Link to={`/excluir/produtos/${produto.id}`}>
-                  {" "}
-                  <Excluir />{" "}
-                </Link>
+            
+                  <span onClick={() => handleDeleteItem(produto.id)}>
+                    {" "}
+                  <Excluir/>{" "}
+                  </span>
               </td>
             </tr>
           ))}
@@ -80,33 +122,4 @@ export default function Produtos() {
       </table>
     </div>
   );
-}
-
-//Exemplo de useEffect 3x.
-// useEffect(()=>{
-//   console.log("Este useEffect renderiza sempre que ocorre alguma atualização no componente!");
-// });
-
-// const [listaProdutosLocal, setListaProdutosLocal] = useState([{}]);
-
-// useEffect(()=>{
-//   console.log("Este useEffect renderiza apenas uma vez no carregamento do componente!");
-// },[]);
-
-// const [counter2, setCounter2] = useState(0);
-
-// useEffect(()=>{
-//   console.log("Este useEffect renderiza apenas se o objeto/elemento/componente e ou variável sofrer uma atualização. Devemos colocar o item a ser monitorado no array de dependências: [ ]");
-// },[counter2]);
-
-// return (
-//   <div>
-//     <h1>Produtos de INFORMÁTICA - FIPAPI</h1>
-//     <p>Os Melhores Produtos do Mercado</p>
-
-//     <div>
-//       <button onClick={()=> setCounter(counter + 1)}>COUNTER - {counter}</button>
-//     </div>
-//     <div>
-//       <button onClick={()=> setCounter2(counter2 + 1)}>COUNTER2 - {counter2}</button>
-//     </div>
+ }
