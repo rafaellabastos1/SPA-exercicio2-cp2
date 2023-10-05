@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import classes from "./Produtos.module.css";
 import { AiFillEdit as Editar } from "react-icons/ai";
@@ -25,7 +26,6 @@ export default function Produtos() {
     }
   }, [open]);
 
-
   return (
     <div>
       <h1>Produtos de INFORMÁTICA - FIPAPI</h1>
@@ -52,7 +52,7 @@ export default function Produtos() {
             <tr key={indice} className={classes.tableLine}>
               <td>{produto.id}</td>
               <td>{produto.nome}</td>
-              <td>{produto.desc}</td>
+              <td>{produto.desc}</td> 
               <td>{produto.preco}</td>
               <td>
                 <img src={produto.img} alt={produto.desc} />
