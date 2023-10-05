@@ -1,31 +1,37 @@
+
 import { useNavigate, useParams } from "react-router-dom";
-import { ListaProdutos } from "../components/ListaProdutos";
 import style from "./ExcluirProdutos.module.css";
+import { useState } from "react";
 
 export default function ExcluirProdutos() {
   document.title = "Excluir Produtos";
 
   const navigate = useNavigate();
-
-  //Receber o ID do produto pelo HOOK useParams( );
   const { id } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [produto, setProduto] = useState(null);
 
-  //Recuperar o produto na lista pelo ID.
-  const produto = ListaProdutos.filter((produto) => produto.id == id)[0];
+  useEffect(() => {
+    // Buscar as informações do produto com base no id
+    fetch(`http://localhost:5000/produtos/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          // Se a resposta não for bem-sucedida, trata como erro
+          throw new Error("Produto não encontrado");
+        }
+        return response.json();
+      })
+      .then((data) => setProduto(data))
+      .catch((error) => {
+        console.error(error);
+        navigate("/produtos"); // Redirecionar para a lista de produtos se o produto não for encontrado
+      });
+  }, [id, navigate]);
 
-  const handleDelete = (event) => {
-    event.preventDefault();
-
-    let indice;
-
-    indice = ListaProdutos.findIndex((item) => item.id === produto.id);
-
-    ListaProdutos.splice(indice, 1);
-
-    alert("Produto exclído com sucesso!");
-
-    navigate("/produtos");
+  const handleDelete = () => {
+    setIsModalOpen(true);
   };
+
 
   return (
     <>
@@ -45,6 +51,8 @@ export default function ExcluirProdutos() {
         </div>
 
       </div>
+
+      {isModalOpen && <ModalExcluir setOpen={setIsModalOpen} />}
     </>
   );
 }

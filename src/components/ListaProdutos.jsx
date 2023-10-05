@@ -1,3 +1,4 @@
+
 export const ListaProdutos = [
     {id:1, nome:'Teclado', desc:'Mecânico', preco: 150, img:'https://picsum.photos/100/100'},
     {id:2, nome:'Mouse', desc:'Óptico', preco: 120, img:'https://picsum.photos/100/100'},
