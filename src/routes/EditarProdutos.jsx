@@ -47,7 +47,6 @@ export default function EditarProdutos() {
     navigate("/produtos")
   }
   
-
   return (
       <div>
         <h1>Editar Produtos</h1> 
@@ -84,8 +83,6 @@ export default function EditarProdutos() {
             <p>Desc: {produto.desc}</p>
             <p>Preço: {produto.preco}</p>
           </div>
-
-
       </div>
   )
 }

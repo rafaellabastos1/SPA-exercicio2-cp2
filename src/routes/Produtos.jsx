@@ -25,7 +25,6 @@ export default function Produtos() {
     }
   }, [open]);
 
-
   return (
     <div>
       <h1>Produtos de INFORMÁTICA - FIPAPI</h1>

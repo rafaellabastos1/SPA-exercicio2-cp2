@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function AdicionarProduto({ onAdicionarProduto, produtos }) {
   const [nome, setNome] = useState('');
   const [preco, setPreco] = useState('');
