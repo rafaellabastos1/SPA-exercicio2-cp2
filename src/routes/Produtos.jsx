@@ -52,7 +52,6 @@ export default function Produtos() {
     })
       .then((response) => response.json())
       .then(() => {
-        // Atualize a lista de produtos após a exclusão
         setListaProdutoExterno((prevLista) =>
           prevLista.filter((produto) => produto.id !== id)
         );
